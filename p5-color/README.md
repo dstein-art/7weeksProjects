@@ -1,1 +1,1 @@
-
+The following sketch will load an image and select random pixels within the image for the purpose of choosing a colors. The resulting technique will produce a large variety of colors that will all look good together.
