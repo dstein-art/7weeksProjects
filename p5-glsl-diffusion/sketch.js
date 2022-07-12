@@ -16,7 +16,7 @@ let img;
 
 function preload(){
   simpleShader = loadShader('texture.vert', 'texture.frag');
-  img = loadImage('assets/CowsAtMarlos.png');
+  //img = loadImage('assets/CowsAtMarlos.png');
 }
 
 
