@@ -33,6 +33,7 @@ function gamePadSummary() {
   // Get the state of all gamepads
   let gamepads = navigator.getGamepads();
   let result = "";
+  let foundOne=false;
 
   for (let i = 0; i < gamepads.length; i++) {
       result+="Gamepad " + i + ":<br>";
@@ -46,12 +47,20 @@ function gamePadSummary() {
           continue;
       }
 
+      foundOne=true;
       result+="    Index: " + gamepads[i].index+"<br>";
       result+="    ID: " + gamepads[i].id+"<br>";
       result+="    Axes: " + gamepads[i].axes.length+" : "+axesValue(gamepads[i])+"<br>";
       result+="    Buttons: " + gamepads[i].buttons.length+" : "+buttonsPressed(gamepads[i])+"<br>";
       result+="    Mapping: " + gamepads[i].mapping+"<br>";
       drawGamePad(gamepads[i]);
+  }
+  if (!foundOne) {
+    textSize(32);
+    fill(0, 102, 153);
+    text('No Joystick Connected', 10, 100);
+    textSize(20);
+    text('Once connected, move controls to detect', 10, 150);
   }
   dataDiv.innerHTML=result;
 }
