@@ -12,3 +12,6 @@
 [P5-glsl-pedro](https://dstein-art.github.io/7weeksProjects/p5-glsl-pedro/index.html)
 
 [P5-midi](https://dstein-art.github.io/7weeksProjects/p5-midi/index.html)
+
+
+[P5-Joysticks](https://dstein-art.github.io/7weeksProjects/p5-joysticks/index.html)
