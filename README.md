@@ -13,5 +13,6 @@
 
 [P5-midi](https://dstein-art.github.io/7weeksProjects/p5-midi/index.html)
 
-
 [P5-Joysticks](https://dstein-art.github.io/7weeksProjects/p5-joysticks/index.html)
+
+[P5-Art-With-Joysticks-Sketch-1](https://dstein-art.github.io/7weeksProjects/p5-art-with-joysticks-glsl-sketch1/index.html)
