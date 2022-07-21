@@ -19,7 +19,7 @@ let buttonData=[];
 
 function preload(){
   simpleShader = loadShader('texture.vert', 'texture.frag');
-  colorImg = loadImage('assets/CowsAtMarlos.png');
+  colorImg = loadImage('assets/chelsea.png');
 }
 
 function setup() {
