@@ -18,3 +18,5 @@
 [P5-Art-With-Joysticks-Sketch-1](https://dstein-art.github.io/7weeksProjects/p5-art-with-joysticks-glsl-sketch1/index.html)
 
 [p5-ml5-faceapi](https://dstein-art.github.io/7weeksProjects/p5-ml5-faceapi/index.html)
+
+[p5-glsl-reaction-diffusion](https://dstein-art.github.io/7weeksProjects/p5-glsl-reaction-diffusion/index.html)
