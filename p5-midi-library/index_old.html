@@ -1,0 +1,98 @@
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>WebMidi.js Quick Start</title>
+    <script src="https://cdn.jsdelivr.net/npm/webmidi@next/dist/iife/webmidi.iife.js"></script>
+    <style>
+      body {background-color: powderblue;}
+      h1   {color: blue;}
+      p    {color: red;}
+      .row {display: flex;}
+      .column {flex: 40%;}
+      </style>
+  </head>
+
+
+  <script type="module">
+    var scale=["C3","D3","E3","F3","G3","A3","B3","C4","D4","E4","F4","G4","A4","B4","C5","D5","E5","F5"];
+    var devicesDiv = document.getElementById('devices');
+    var notesDiv = document.getElementById('notes');
+    var controlDiv = document.getElementById('control');
+    var body = document.getElementById('bod');
+    var inDeviceNumber=2;
+    var outDeviceNumber=0;
+    var outChannelNumber=1;
+
+    var outDevice;
+
+    // To demonstrate notes getting played, let's play a chord every time the mouse is clicked
+    body.onclick = function(e){ 
+      var noteToPlay=Math.round(e.clientX / 100);
+      outDevice.channels[outChannelNumber].playNote([scale[noteToPlay],scale[noteToPlay+2],scale[noteToPlay+4]], {attack: 0.5, duration: 4000});
+    };
+
+    // Enable WebMidi.js and trigger the onEnabled() function when ready
+    WebMidi
+      .enable()
+      .then(onEnabled)
+      .catch(err => alert(err));
+
+    // Function triggered when WebMidi.js is ready
+    function onEnabled() {
+  
+      devicesDiv.innerHTML='Make sure Midi Devices are connected as follows (or change constants in code):<br>InputDevice#'+inDeviceNumber+'   OutputDevice#'+outDeviceNumber+'  MidiChannelOut: '+outChannelNumber+"<br><br>";
+      // Display available MIDI input devices
+      if (WebMidi.inputs.length < 1) {
+        devicesDiv.innerHTML+= "No input device detected.";
+      } else {
+        WebMidi.inputs.forEach((device, index) => {
+          if (inDeviceNumber==index) {
+            devicesDiv.innerHTML+= `<b>Input Device: ${index}: ${device.name}</b> <br>`;
+          } else {
+            devicesDiv.innerHTML+= `Input Device: ${index}: ${device.name} <br>`;
+          }
+        });
+      }
+      
+      if (WebMidi.outputs.length < 1) {
+        devicesDiv.innerHTML+= "No output device detected.";
+      } else {
+        WebMidi.outputs.forEach((device, index) => {
+          if (outDeviceNumber==index) {
+            devicesDiv.innerHTML+= `<b>Output Device: ${index}: ${device.name}</b> <br>`;
+          }
+        });
+      }
+      
+      const mySynth = WebMidi.inputs[inDeviceNumber];
+      // const mySynth = WebMidi.getInputByName("TYPE NAME HERE!")
+  
+      mySynth.addListener("noteon", e => {
+        notesDiv.innerHTML= `Note On ${e.note.number} ${JSON.stringify(e.message)}<br>`+notesDiv.innerHTML;
+      });
+
+      mySynth.addListener("noteoff", e => {
+        notesDiv.innerHTML= `Note Off ${e.note.name} <br>`+notesDiv.innerHTML;
+      });
+
+      mySynth.addListener("controlchange", e => {
+        controlDiv.innerHTML= `control change: ${e.controller.number} ${e.value} <br>`+controlDiv.innerHTML;
+      });
+
+      outDevice = WebMidi.outputs[outDeviceNumber];
+  }
+    
+  </script>
+
+  <body id="bod">
+    <h1>WebMidi.js Quick Start - Click Mouse to play a chord</h1>
+    
+    <div id="devices"></div>
+    <div class="row">
+    <div class="column" id="notes"></div>
+    <div class="column" id="control"></div>
+    </div>
+  </body>
+
+</html>
